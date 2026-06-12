@@ -13,22 +13,26 @@
 
         body {
             font-family: 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
-            background-color: #0a1128;
+            /* Градиент от тёмно-синего сверху до светлого снизу */
+            background: linear-gradient(180deg, #0a1128 0%, #1a3a5c 50%, #2d6a8f 100%);
             color: #e0e7ff;
             line-height: 1.5;
             padding: 2rem;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #0f172a 0%, #0a0f1f 100%);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(2px);
             border-radius: 2rem;
             padding: 2rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid #1e2a5e;
+            border: 1px solid rgba(30, 42, 94, 0.5);
         }
 
+        /* Остальные стили такие же, как в предыдущей версии */
         h1 {
             font-size: 3rem;
             background: linear-gradient(135deg, #60a5fa, #3b82f6, #1e3a8a);
@@ -42,26 +46,26 @@
 
         .japanese {
             font-size: 1.2rem;
-            color: #94a3b8;
+            color: #b0c4de;
             text-align: center;
             letter-spacing: 0.1em;
             margin-bottom: 2rem;
         }
 
-        /* Стили для вкладок */
+        /* Вкладки */
         .tabs {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid rgba(30, 41, 59, 0.6);
             padding-bottom: 0.5rem;
         }
 
         .tab-btn {
             background: transparent;
             border: none;
-            color: #94a3b8;
+            color: #cbd5e1;
             padding: 0.75rem 1.5rem;
             font-size: 1rem;
             font-weight: 600;
@@ -82,7 +86,6 @@
             border-bottom: 2px solid #3b82f6;
         }
 
-        /* Содержимое вкладок */
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -120,11 +123,12 @@
         }
 
         .rank-card {
-            background: rgba(30, 41, 59, 0.6);
+            background: rgba(30, 41, 59, 0.7);
             border-radius: 1rem;
             padding: 1rem;
             border-left: 4px solid #3b82f6;
             margin-bottom: 0.5rem;
+            backdrop-filter: blur(4px);
         }
 
         .rank-title {
@@ -153,10 +157,11 @@
         }
 
         .style-card {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.8);
             border-radius: 0.75rem;
             padding: 1rem;
             border: 1px solid #1e293b;
+            backdrop-filter: blur(4px);
         }
 
         .style-number {
@@ -179,11 +184,12 @@
         }
 
         .stage {
-            background: rgba(30, 41, 59, 0.4);
+            background: rgba(30, 41, 59, 0.6);
             border-radius: 0.75rem;
             padding: 1rem;
             margin: 1rem 0;
             border-left: 3px solid #60a5fa;
+            backdrop-filter: blur(4px);
         }
 
         .stage-title {
@@ -200,10 +206,11 @@
         }
 
         .codex-item {
-            background: linear-gradient(135deg, #0f172a, #0a0f1f);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(10, 15, 31, 0.8));
             border-radius: 0.75rem;
             padding: 1rem;
             border: 1px solid #1e2a5e;
+            backdrop-filter: blur(4px);
         }
 
         .codex-number {
@@ -224,18 +231,19 @@
         }
 
         .requirements {
-            background: #0f172a;
+            background: rgba(15, 23, 42, 0.7);
             border-radius: 0.75rem;
             padding: 1rem;
             margin-top: 1rem;
+            backdrop-filter: blur(4px);
         }
 
         footer {
             margin-top: 3rem;
             text-align: center;
-            color: #475569;
+            color: #94a3b8;
             font-size: 0.8rem;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid rgba(30, 41, 59, 0.6);
             padding-top: 1.5rem;
         }
 
@@ -280,32 +288,32 @@
                 <div class="rank-card">
                     <div class="rank-title"><span class="rank-number">1</span> Гию Томиока</div>
                     <div>Столп Дыхания</div>
-                    <div style="font-size:0.85rem; color:#94a3b8;">Руководство всем составом · Разработка стратегий и техник · Обучение высших рангов · Принятие ключевых решений</div>
+                    <div style="font-size:0.85rem; color:#cbd5e1;">Руководство всем составом · Разработка стратегий и техник · Обучение высших рангов · Принятие ключевых решений</div>
                 </div>
                 <div class="rank-card">
                     <div class="rank-title"><span class="rank-number">2</span> Цугуко</div>
                     <div>Прямой-ученик Столпа</div>
-                    <div style="font-size:0.85rem; color:#94a3b8;">Проверка отчетов · Помощь истребителям с повышением · Наблюдение за составом · Проведение этапов (1-3) · Помощь в проведении агитации · 220 минут в неделю + прямые обязанности</div>
+                    <div style="font-size:0.85rem; color:#cbd5e1;">Проверка отчетов · Помощь истребителям с повышением · Наблюдение за составом · Проведение этапов (1-3) · Помощь в проведении агитации · 220 минут в неделю + прямые обязанности</div>
                 </div>
                 <div class="rank-card">
                     <div class="rank-title"><span class="rank-number">3</span> Инструктор</div>
                     <div>Инструктор дыхания</div>
-                    <div style="font-size:0.85rem; color:#94a3b8;">Проведение этапов (1-3) · Тренировки для состава и штаба истребителей · Помощь в проведении агитации · 300 минут в неделю + тренировка/мероприятие</div>
+                    <div style="font-size:0.85rem; color:#cbd5e1;">Проведение этапов (1-3) · Тренировки для состава и штаба истребителей · Помощь в проведении агитации · 300 минут в неделю + тренировка/мероприятие</div>
                 </div>
                 <div class="rank-card">
                     <div class="rank-title"><span class="rank-number">4</span> Истребитель</div>
                     <div>Истребитель дыхания</div>
-                    <div style="font-size:0.85rem; color:#94a3b8;">Участие в событиях состава · Участие в иных событиях · Выполнение боевых заданий · Совершенствование техник</div>
+                    <div style="font-size:0.85rem; color:#cbd5e1;">Участие в событиях состава · Участие в иных событиях · Выполнение боевых заданий · Совершенствование техник</div>
                 </div>
                 <div class="rank-card">
                     <div class="rank-title"><span class="rank-number">5</span> Какуши</div>
                     <div>Специалист поддержки</div>
-                    <div style="font-size:0.85rem; color:#94a3b8;">Участие в событиях состава · Участие в иных событиях · Работа в Поместье Бабочки · Поддержка истребителей</div>
+                    <div style="font-size:0.85rem; color:#cbd5e1;">Участие в событиях состава · Участие в иных событиях · Работа в Поместье Бабочки · Поддержка истребителей</div>
                 </div>
                 <div class="rank-card">
                     <div class="rank-title"><span class="rank-number">6</span> Ученик</div>
                     <div>Новичок в составе</div>
-                    <div style="font-size:0.85rem; color:#94a3b8;">Участие в событиях состава · Участие в иных событиях · Прохождение Финального Отбора · Изучение основ Дыхания Воды</div>
+                    <div style="font-size:0.85rem; color:#cbd5e1;">Участие в событиях состава · Участие в иных событиях · Прохождение Финального Отбора · Изучение основ Дыхания Воды</div>
                 </div>
             </div>
 
@@ -414,14 +422,10 @@
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Убираем активный класс у всех кнопок и содержимого
                 tabBtns.forEach(b => b.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
                 
-                // Добавляем активный класс нажатой кнопке
                 btn.classList.add('active');
-                
-                // Показываем соответствующее содержимое
                 const tabId = btn.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
