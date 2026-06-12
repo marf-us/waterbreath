@@ -44,16 +44,32 @@
             z-index: 1;
         }
 
-        /* Шапка с аниме-стилем */
+        /* Шапка с аниме-стилем и картинкой */
         .hero {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem;
             margin-bottom: 2rem;
             background: rgba(10, 17, 40, 0.6);
             backdrop-filter: blur(10px);
             border-radius: 2rem;
             border: 1px solid rgba(59, 130, 246, 0.3);
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .hero-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
         }
 
         h1 {
@@ -352,6 +368,10 @@
             .hero {
                 padding: 1.5rem;
             }
+            .hero-image {
+                width: 120px;
+                height: 120px;
+            }
             h1 {
                 font-size: 2rem;
             }
@@ -385,8 +405,9 @@
 </head>
 <body>
     <div class="container">
-        <!-- Герой-секция с заголовком -->
+        <!-- Герой-секция с заголовком и картинкой -->
         <div class="hero">
+            <img src="https://i.ibb.co/kgPqXhJ3/29ad7a5af5002f9a6ffbe7a91046f446.jpg" alt="Гию Томиока" class="hero-image">
             <h1>ДЫХАНИЕ ВОДЫ</h1>
             <div class="japanese">水の呼吸 — Mizu no kokyū</div>
             <div class="subtitle">Одно из пяти базовых дыханий, имитирующее текучесть и адаптивность воды</div>
