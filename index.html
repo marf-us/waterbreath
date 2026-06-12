@@ -17,6 +17,18 @@
             color: #e0e7ff;
             line-height: 1.5;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Canvas для частиц */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
@@ -27,7 +39,7 @@
             z-index: 1;
         }
 
-        /* Шапка без размытия */
+        /* Шапка */
         .hero {
             position: relative;
             text-align: center;
@@ -35,7 +47,8 @@
             margin-bottom: 3rem;
             border-radius: 20px;
             overflow: hidden;
-            background-color: #0a0f1f;
+            background-color: rgba(10, 15, 31, 0.5);
+            backdrop-filter: blur(2px);
         }
 
         .hero-bg {
@@ -45,19 +58,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 0;
-            opacity: 0.35;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(10, 17, 40, 0.8), rgba(26, 58, 92, 0.7));
-            z-index: 1;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         .hero-content {
@@ -91,7 +93,7 @@
             margin-right: auto;
         }
 
-        /* Вкладки в стиле сайта-образца */
+        /* Вкладки */
         .tabs {
             display: flex;
             flex-wrap: wrap;
@@ -140,7 +142,6 @@
             to { opacity: 1; }
         }
 
-        /* Стили секций — как на сайте-образце */
         .section-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -157,7 +158,6 @@
             font-size: 0.9rem;
         }
 
-        /* Карточки в стиле сайта-образца */
         .rank-card {
             background: rgba(15, 23, 42, 0.6);
             border-radius: 12px;
@@ -169,16 +169,12 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(2px);
         }
 
         .rank-name {
             font-weight: 600;
             color: #e0e7ff;
-        }
-
-        .rank-arrow {
-            color: #60a5fa;
-            font-size: 1.2rem;
         }
 
         .rank-requirements {
@@ -194,7 +190,6 @@
             color: #93c5fd;
         }
 
-        /* Сетка для способов получения баллов */
         .points-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -210,6 +205,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.85rem;
+            backdrop-filter: blur(2px);
         }
 
         .point-name {
@@ -221,13 +217,13 @@
             color: #60a5fa;
         }
 
-        /* Информационные блоки */
         .info-block {
             background: rgba(30, 41, 59, 0.4);
             border-radius: 12px;
             padding: 1rem 1.25rem;
             margin-bottom: 1rem;
             border-left: 3px solid #3b82f6;
+            backdrop-filter: blur(2px);
         }
 
         .info-title {
@@ -237,7 +233,6 @@
             font-size: 1rem;
         }
 
-        /* Стили для списка стилей */
         .techniques-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -250,6 +245,7 @@
             border-radius: 10px;
             padding: 0.85rem 1rem;
             border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(2px);
         }
 
         .tech-number {
@@ -269,7 +265,6 @@
             color: #94a3b8;
         }
 
-        /* Кодекс */
         .codex-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -282,6 +277,7 @@
             border-radius: 10px;
             padding: 1rem;
             border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(2px);
         }
 
         .codex-number {
@@ -325,15 +321,16 @@
                 flex-direction: column;
                 text-align: center;
             }
-            .rank-arrow {
-                transform: rotate(90deg);
-            }
         }
     </style>
 </head>
 <body>
+
+    <!-- Canvas для частиц -->
+    <canvas id="particles-canvas"></canvas>
+
     <div class="container">
-        <!-- Шапка с фоновой картинкой (без размытия) -->
+        <!-- Шапка с фоновой картинкой -->
         <div class="hero">
             <img src="https://i.ibb.co/kgPqXhJ3/29ad7a5af5002f9a6ffbe7a91046f446.jpg" alt="Гию Томиока фон" class="hero-bg">
             <div class="hero-content">
@@ -384,7 +381,7 @@
             </div>
         </div>
 
-        <!-- Вкладка 2: Система повышения (скопирована с сайта-образца) -->
+        <!-- Вкладка 2: Система повышения -->
         <div id="promotion" class="tab-content">
             <div>
                 <h2 class="section-title">Система повышения</h2>
@@ -500,6 +497,7 @@
     </div>
 
     <script>
+        // Переключение вкладок
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
@@ -513,6 +511,72 @@
                 document.getElementById(tabId).classList.add('active');
             });
         });
+
+        // Анимация частиц
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particles = [];
+        let particleCount = 80;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    speedY: Math.random() * 0.5 + 0.2,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+        
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                ctx.fill();
+                
+                // Обновление позиции
+                p.x += p.speedX;
+                p.y += p.speedY;
+                
+                // Возврат в начало, если частица вышла за границы
+                if (p.y > canvas.height) {
+                    p.y = 0;
+                    p.x = Math.random() * canvas.width;
+                }
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+            }
+            
+            requestAnimationFrame(drawParticles);
+        }
+        
+        function initParticles() {
+            resizeCanvas();
+            createParticles();
+            drawParticles();
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createParticles();
+        });
+        
+        initParticles();
     </script>
 </body>
 </html>
