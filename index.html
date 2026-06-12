@@ -12,65 +12,93 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
-            /* Градиент от тёмно-синего сверху до светлого снизу */
-            background: linear-gradient(180deg, #0a1128 0%, #1a3a5c 50%, #2d6a8f 100%);
+            font-family: 'Inter', 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(180deg, #0a1128 0%, #0f1a3a 30%, #1a3a5c 70%, #2d6a8f 100%);
             color: #e0e7ff;
             line-height: 1.5;
-            padding: 2rem;
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(2px);
-            border-radius: 2rem;
-            padding: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(30, 42, 94, 0.5);
+        /* Анимированный фон с волнами */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(59,130,246,0.05)" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-repeat: repeat-x;
+            background-position: bottom;
+            background-size: cover;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Остальные стили такие же, как в предыдущей версии */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Шапка с аниме-стилем */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            background: rgba(10, 17, 40, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             background: linear-gradient(135deg, #60a5fa, #3b82f6, #1e3a8a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-align: center;
             margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         .japanese {
-            font-size: 1.2rem;
-            color: #b0c4de;
-            text-align: center;
-            letter-spacing: 0.1em;
-            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            color: #60a5fa;
+            letter-spacing: 0.2em;
+            font-weight: 300;
         }
 
-        /* Вкладки */
+        .subtitle {
+            color: #94a3b8;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Стильные вкладки */
         .tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(30, 41, 59, 0.6);
-            padding-bottom: 0.5rem;
+            justify-content: center;
         }
 
         .tab-btn {
-            background: transparent;
-            border: none;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             color: #cbd5e1;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
+            padding: 0.85rem 1.8rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            border-radius: 0.5rem;
+            border-radius: 2rem;
             transition: all 0.3s ease;
             font-family: inherit;
         }
@@ -78,345 +106,430 @@
         .tab-btn:hover {
             background: rgba(59, 130, 246, 0.2);
             color: #60a5fa;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, #1e3a8a, #1e293b);
             color: #60a5fa;
-            border-bottom: 2px solid #3b82f6;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeInUp 0.4s ease;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Секции с карточками */
+        .section-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.4);
         }
 
         h2 {
             font-size: 1.8rem;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: #60a5fa;
-            border-left: 4px solid #3b82f6;
-            padding-left: 1rem;
+            display: inline-block;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 0.5rem;
         }
 
         h3 {
             font-size: 1.4rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
+            margin: 1.5rem 0 1rem 0;
             color: #a5b4fc;
         }
 
-        .hierarchy {
+        /* Иерархия сеткой */
+        .hierarchy-grid {
             display: grid;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .rank-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.5);
             border-radius: 1rem;
-            padding: 1rem;
+            padding: 1.25rem;
             border-left: 4px solid #3b82f6;
-            margin-bottom: 0.5rem;
-            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .rank-card:hover {
+            background: rgba(30, 41, 59, 0.7);
+            transform: translateX(5px);
+        }
+
+        .rank-number {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
+            text-align: center;
+            line-height: 2.5rem;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
 
         .rank-title {
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #93c5fd;
-        }
-
-        .rank-number {
-            background: #1e293b;
             display: inline-block;
-            width: 2rem;
-            height: 2rem;
-            text-align: center;
-            line-height: 2rem;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-            font-weight: bold;
         }
 
-        .style-grid {
+        /* Стили техник */
+        .techniques-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
         }
 
-        .style-card {
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 0.75rem;
-            padding: 1rem;
+        .tech-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 1rem;
+            padding: 1.25rem;
             border: 1px solid #1e293b;
-            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
         }
 
-        .style-number {
-            font-size: 1.5rem;
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        .tech-number {
+            font-size: 1.8rem;
             font-weight: bold;
             color: #60a5fa;
             font-family: monospace;
         }
 
-        .style-name {
+        .tech-name {
             font-size: 1.2rem;
             font-weight: bold;
             margin: 0.5rem 0;
         }
 
-        .style-jp {
-            font-size: 0.85rem;
+        .tech-jp {
+            font-size: 0.8rem;
             color: #94a3b8;
             font-family: monospace;
+            margin-top: 0.5rem;
         }
 
-        .stage {
-            background: rgba(30, 41, 59, 0.6);
-            border-radius: 0.75rem;
-            padding: 1rem;
+        /* Блоки информации */
+        .info-block {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 1rem;
+            padding: 1.25rem;
             margin: 1rem 0;
             border-left: 3px solid #60a5fa;
-            backdrop-filter: blur(4px);
         }
 
-        .stage-title {
+        .info-title {
             font-weight: bold;
             color: #93c5fd;
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
+        /* Кодекс сеткой */
         .codex-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
         }
 
-        .codex-item {
+        .codex-card {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(10, 15, 31, 0.8));
-            border-radius: 0.75rem;
-            padding: 1rem;
+            border-radius: 1rem;
+            padding: 1.25rem;
             border: 1px solid #1e2a5e;
-            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .codex-card:hover {
+            transform: translateY(-3px);
+            border-color: #3b82f6;
         }
 
         .codex-number {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
             color: #3b82f6;
-            opacity: 0.5;
+            opacity: 0.4;
             line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Система баллов */
+        .points-system {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .points-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .points-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #60a5fa;
+            margin-bottom: 1rem;
         }
 
         .badge {
             display: inline-block;
             background: #1e3a8a;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            margin-left: 0.5rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            margin: 0.5rem 0.25rem 0;
         }
 
-        .requirements {
+        .requirement-box {
             background: rgba(15, 23, 42, 0.7);
-            border-radius: 0.75rem;
-            padding: 1rem;
+            border-radius: 1rem;
+            padding: 1.5rem;
             margin-top: 1rem;
-            backdrop-filter: blur(4px);
+            text-align: center;
+            border: 1px solid #3b82f6;
         }
 
         footer {
             margin-top: 3rem;
             text-align: center;
-            color: #94a3b8;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(30, 41, 59, 0.6);
-            padding-top: 1.5rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
         }
 
+        /* Адаптивность */
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .container {
-                padding: 1rem;
+            .hero {
+                padding: 1.5rem;
             }
             h1 {
                 font-size: 2rem;
             }
+            .japanese {
+                font-size: 1rem;
+            }
             .tabs {
-                flex-direction: column;
+                gap: 0.5rem;
             }
             .tab-btn {
-                text-align: center;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
             }
+            .section-card {
+                padding: 1rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            .hierarchy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Анимация появления */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
+            100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>ДЫХАНИЕ ВОДЫ</h1>
-        <div class="japanese">水みずの呼こ吸きゅう — Mizu no kokyū</div>
+        <!-- Герой-секция с заголовком -->
+        <div class="hero">
+            <h1>ДЫХАНИЕ ВОДЫ</h1>
+            <div class="japanese">水の呼吸 — Mizu no kokyū</div>
+            <div class="subtitle">Одно из пяти базовых дыханий, имитирующее текучесть и адаптивность воды</div>
+        </div>
 
         <!-- Вкладки навигации -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="hierarchy">Иерархия</button>
-            <button class="tab-btn" data-tab="promotion">Система повышения</button>
-            <button class="tab-btn" data-tab="codex">Кодекс воды</button>
-            <button class="tab-btn" data-tab="training">Обучение учеников</button>
-            <button class="tab-btn" data-tab="breathing">Тренировки</button>
-            <button class="tab-btn" data-tab="sword">Владение клинком</button>
+            <button class="tab-btn active" data-tab="hierarchy">🌊 Иерархия</button>
+            <button class="tab-btn" data-tab="promotion">📈 Система повышения</button>
+            <button class="tab-btn" data-tab="codex">📜 Кодекс воды</button>
+            <button class="tab-btn" data-tab="training">🎓 Обучение учеников</button>
+            <button class="tab-btn" data-tab="breathing">💨 Тренировки</button>
+            <button class="tab-btn" data-tab="sword">⚔️ Владение клинком</button>
         </div>
 
         <!-- Вкладка 1: Иерархия -->
         <div id="hierarchy" class="tab-content active">
-            <h2>Иерархия Дыхания Воды</h2>
-            <div class="hierarchy">
-                <div class="rank-card">
-                    <div class="rank-title"><span class="rank-number">1</span> Гию Томиока</div>
-                    <div>Столп Дыхания</div>
-                    <div style="font-size:0.85rem; color:#cbd5e1;">Руководство всем составом · Разработка стратегий и техник · Обучение высших рангов · Принятие ключевых решений</div>
-                </div>
-                <div class="rank-card">
-                    <div class="rank-title"><span class="rank-number">2</span> Цугуко</div>
-                    <div>Прямой-ученик Столпа</div>
-                    <div style="font-size:0.85rem; color:#cbd5e1;">Проверка отчетов · Помощь истребителям с повышением · Наблюдение за составом · Проведение этапов (1-3) · Помощь в проведении агитации · 220 минут в неделю + прямые обязанности</div>
-                </div>
-                <div class="rank-card">
-                    <div class="rank-title"><span class="rank-number">3</span> Инструктор</div>
-                    <div>Инструктор дыхания</div>
-                    <div style="font-size:0.85rem; color:#cbd5e1;">Проведение этапов (1-3) · Тренировки для состава и штаба истребителей · Помощь в проведении агитации · 300 минут в неделю + тренировка/мероприятие</div>
-                </div>
-                <div class="rank-card">
-                    <div class="rank-title"><span class="rank-number">4</span> Истребитель</div>
-                    <div>Истребитель дыхания</div>
-                    <div style="font-size:0.85rem; color:#cbd5e1;">Участие в событиях состава · Участие в иных событиях · Выполнение боевых заданий · Совершенствование техник</div>
-                </div>
-                <div class="rank-card">
-                    <div class="rank-title"><span class="rank-number">5</span> Какуши</div>
-                    <div>Специалист поддержки</div>
-                    <div style="font-size:0.85rem; color:#cbd5e1;">Участие в событиях состава · Участие в иных событиях · Работа в Поместье Бабочки · Поддержка истребителей</div>
-                </div>
-                <div class="rank-card">
-                    <div class="rank-title"><span class="rank-number">6</span> Ученик</div>
-                    <div>Новичок в составе</div>
-                    <div style="font-size:0.85rem; color:#cbd5e1;">Участие в событиях состава · Участие в иных событиях · Прохождение Финального Отбора · Изучение основ Дыхания Воды</div>
+            <div class="section-card">
+                <h2>Иерархия Дыхания Воды</h2>
+                <div class="hierarchy-grid">
+                    <div class="rank-card"><span class="rank-number">1</span><span class="rank-title">Гию Томиока</span><div style="margin-top:0.5rem;">Столп Дыхания</div><div style="font-size:0.85rem; color:#94a3b8; margin-top:0.5rem;">Руководство составом · Разработка стратегий · Обучение высших рангов</div></div>
+                    <div class="rank-card"><span class="rank-number">2</span><span class="rank-title">Цугуко</span><div>Прямой-ученик Столпа</div><div style="font-size:0.85rem; color:#94a3b8;">Проверка отчетов · Помощь с повышением · 220 мин/неделю</div></div>
+                    <div class="rank-card"><span class="rank-number">3</span><span class="rank-title">Инструктор</span><div>Инструктор дыхания</div><div style="font-size:0.85rem; color:#94a3b8;">Проведение этапов 1-3 · Тренировки состава · 300 мин/неделю</div></div>
+                    <div class="rank-card"><span class="rank-number">4</span><span class="rank-title">Истребитель</span><div>Истребитель дыхания</div><div style="font-size:0.85rem; color:#94a3b8;">Участие в событиях · Боевые задания · Совершенствование техник</div></div>
+                    <div class="rank-card"><span class="rank-number">5</span><span class="rank-title">Какуши</span><div>Специалист поддержки</div><div style="font-size:0.85rem; color:#94a3b8;">Работа в Поместье Бабочки · Поддержка истребителей</div></div>
+                    <div class="rank-card"><span class="rank-number">6</span><span class="rank-title">Ученик</span><div>Новичок в составе</div><div style="font-size:0.85rem; color:#94a3b8;">Изучение основ · Прохождение Финального Отбора</div></div>
                 </div>
             </div>
 
-            <h2>Одиннадцать стилей дыхания воды</h2>
-            <p>Стили боя основаны на ударах и их комбинациях, совершаемых в движении. В основе ударов лежит использование силы вращения тела в сочетании с элементами акробатики.</p>
-            <div class="style-grid">
-                <div class="style-card"><div class="style-number">壱ノ型</div><div class="style-name">Рассекающая водную гладь</div><div>Одиночный горизонтальный удар с максимальной амплитудой.</div><div class="style-jp">水面斬り — Minamo giri</div></div>
-                <div class="style-card"><div class="style-number">弐ノ型</div><div class="style-name">Водяное колесо</div><div>Одиночный удар в прыжке сальто. Модификация: Горизонтальное водяное колесо.</div><div class="style-jp">水車 — Mizu guruma</div></div>
-                <div class="style-card"><div class="style-number">参ノ型</div><div class="style-name">Танец быстротечного потока</div><div>Серия рывков с горизонтальными ударами.</div><div class="style-jp">流流舞い — Ryūryū mai</div></div>
-                <div class="style-card"><div class="style-number">肆ノ型</div><div class="style-name">Удар волной</div><div>Серия следующих друг за другом горизонтальных ударов.</div><div class="style-jp">打ち潮 — Uchishio</div></div>
-                <div class="style-card"><div class="style-number">伍ノ型</div><div class="style-name">Милосердный дождь сухого дня</div><div>Удар с минимальным давлением на клинок.</div><div class="style-jp">干天の慈雨 — Kanten no jiu</div></div>
-                <div class="style-card"><div class="style-number">陸ノ型</div><div class="style-name">Водоворот</div><div>Затяжной горизонтальный удар. Модификация: Поток водоворота.</div><div class="style-jp">ねじれ渦 — Nejire uzu</div></div>
-                <div class="style-card"><div class="style-number">漆ノ型</div><div class="style-name">Пронзающий удар капель волны</div><div>Колющий удар остриём. Модификация «изгиб».</div><div class="style-jp">雫波紋突き — Shizuku hamon dzuki</div></div>
-                <div class="style-card"><div class="style-number">捌ノ型</div><div class="style-name">Поток водопада</div><div>Одиночный вертикальный удар.</div><div class="style-jp">滝壺 — Takitsubo</div></div>
-                <div class="style-card"><div class="style-number">玖ノ型</div><div class="style-name">Хаос водных всплесков</div><div>Рывок на длинную дистанцию.</div><div class="style-jp">水流飛沫・乱 — Suiryū shibuki - ran</div></div>
-                <div class="style-card"><div class="style-number">拾ノ型</div><div class="style-name">Дракон перемен</div><div>Непрерывная атака в движении.</div><div class="style-jp">生生流転 — Seisei ruten</div></div>
-                <div class="style-card"><div class="style-number">拾壱ノ型</div><div class="style-name">Штиль</div><div>Создан Гию Томиокой. Защитная стойка.</div><div class="style-jp">凪 — Nagi</div></div>
+            <div class="section-card">
+                <h2>Одиннадцать стилей дыхания воды</h2>
+                <div class="techniques-grid">
+                    <div class="tech-card"><div class="tech-number">壱ノ型</div><div class="tech-name">Рассекающая водную гладь</div><div>Одиночный горизонтальный удар</div><div class="tech-jp">水面斬り — Minamo giri</div></div>
+                    <div class="tech-card"><div class="tech-number">弐ノ型</div><div class="tech-name">Водяное колесо</div><div>Удар в прыжке сальто</div><div class="tech-jp">水車 — Mizu guruma</div></div>
+                    <div class="tech-card"><div class="tech-number">参ノ型</div><div class="tech-name">Танец быстротечного потока</div><div>Серия рывков с ударами</div><div class="tech-jp">流流舞い — Ryūryū mai</div></div>
+                    <div class="tech-card"><div class="tech-number">肆ノ型</div><div class="tech-name">Удар волной</div><div>Серия горизонтальных ударов</div><div class="tech-jp">打ち潮 — Uchishio</div></div>
+                    <div class="tech-card"><div class="tech-number">伍ノ型</div><div class="tech-name">Милосердный дождь</div><div>Минимальное давление на клинок</div><div class="tech-jp">干天の慈雨 — Kanten no jiu</div></div>
+                    <div class="tech-card"><div class="tech-number">陸ノ型</div><div class="tech-name">Водоворот</div><div>Затяжной горизонтальный удар</div><div class="tech-jp">ねじれ渦 — Nejire uzu</div></div>
+                    <div class="tech-card"><div class="tech-number">漆ノ型</div><div class="tech-name">Пронзающий удар капель</div><div>Колющий удар остриём</div><div class="tech-jp">雫波紋突き — Shizuku hamon dzuki</div></div>
+                    <div class="tech-card"><div class="tech-number">捌ノ型</div><div class="tech-name">Поток водопада</div><div>Вертикальный удар</div><div class="tech-jp">滝壺 — Takitsubo</div></div>
+                    <div class="tech-card"><div class="tech-number">玖ノ型</div><div class="tech-name">Хаос водных всплесков</div><div>Рывок на длинную дистанцию</div><div class="tech-jp">水流飛沫・乱 — Suiryū shibuki - ran</div></div>
+                    <div class="tech-card"><div class="tech-number">拾ノ型</div><div class="tech-name">Дракон перемен</div><div>Непрерывная атака в движении</div><div class="tech-jp">生生流転 — Seisei ruten</div></div>
+                    <div class="tech-card"><div class="tech-number">拾壱ノ型</div><div class="tech-name">Штиль</div><div>Защитная стойка (создана Гию)</div><div class="tech-jp">凪 — Nagi</div></div>
+                </div>
             </div>
         </div>
 
         <!-- Вкладка 2: Система повышения -->
         <div id="promotion" class="tab-content">
-            <h2>СИСТЕМА ПОВЫШЕНИЯ</h2>
-            <p>10 ступеней развития истребителя · От Сейто до Киноэ</p>
+            <div class="section-card">
+                <h2>Система повышения</h2>
+                <p>10 ступеней развития истребителя · От Сейто до Киноэ</p>
 
-            <h3>Общая информация</h3>
-            <div class="stage"><div class="stage-title">Отчетность</div>Отчеты в Discord канал · Канал: #Отчеты · Подробное описание выполнения · Скриншоты по необходимости</div>
-            <div class="stage"><div class="stage-title">Лимиты</div>Убийство демона лимит 5 за ранг · Сразить истребителя лимит 3 за ранг · Сдача устава лимит 1 за ранг · Захват точек ограничения по рангам</div>
-            <div class="stage"><div class="stage-title">Обязательные требования</div>Проявление цвета катаны · Испытания с панкунами · Спарринги со столпами · РП отыгровки</div>
+                <h3>Общая информация</h3>
+                <div class="info-block"><div class="info-title">📋 Отчетность</div>Отчеты в Discord канал #Отчеты · Подробное описание · Скриншоты</div>
+                <div class="info-block"><div class="info-title">⚠️ Лимиты</div>Убийство демона: 5 за ранг · Сражение с истребителем: 3 за ранг · Сдача устава: 1 за ранг</div>
+                <div class="info-block"><div class="info-title">⚔️ Обязательные требования</div>Проявление цвета катаны · Испытания с панкунами · Спарринги со столпами · РП отыгровки</div>
 
-            <h3>Система баллов</h3>
-            <div class="stage"><div class="stage-title">Младший Состав</div>Участие в тренировке 4 балла · Поручение от столпа воды 4 балла · Поручение от инструктора 3 балла · Участие в ивенте 3 балла · Сдача знания на устав 2 балла · Захват точки 1 балл · Убийство демона 1 балл · Сразить истребителя на гальке 1 балл<br><span class="badge">Лимиты: убийство демона - 5 за ранг, сразить истребителя - 3 за ранг, сдача устава - 1 за ранг</span></div>
-            <div class="stage"><div class="stage-title">Средний Состав</div>Участие в тренировке 4 балла · Поручение от столпа воды 4 балла · Поручение от инструктора 3 балла · Участие в ивенте 3 балла · Захват точки 1 балл · Убийство демона 1 балл · Сразить истребителя на гальке 1-2 балла<br><span class="badge">Лимиты: захват точки, убийство демона, сразить истребителя - 1/3 от баллов на ранг</span></div>
-            <div class="stage"><div class="stage-title">Высший Состав</div>Участие в тренировке 4 балла · Сбор строя для активности 4 балла · Поручение от столпа воды 4 балла · Поручение от инструктора 3 балла · Участие в ивенте 3 балла · Захват точки 1 балл · Убийство демона 1 балл · Сразить истребителя на гальке 1-2 балла<br><span class="badge">Лимиты: захват точки, убийство демона, сразить истребителя - 1/4 от баллов на ранг</span></div>
+                <h3>Система баллов</h3>
+                <div class="points-system">
+                    <div class="points-card"><div class="points-title">Младший Состав</div>Тренировка: 4 · Поручение столпа: 4 · Ивент: 3 · Устав: 2 · Захват точки: 1 · Убийство: 1<br><span class="badge">Лимит убийств: 5</span></div>
+                    <div class="points-card"><div class="points-title">Средний Состав</div>Тренировка: 4 · Поручение: 4 · Ивент: 3 · Захват точки: 1 · Убийство: 1 · Сражение: 1-2<br><span class="badge">Лимит: 1/3 от баллов</span></div>
+                    <div class="points-card"><div class="points-title">Высший Состав</div>Тренировка: 4 · Сбор строя: 4 · Поручение: 4 · Ивент: 3 · Захват точки: 1 · Убийство: 1 · Сражение: 1-2<br><span class="badge">Лимит: 1/4 от баллов</span></div>
+                </div>
 
-            <h3>Переход на следующий ранг</h3>
-            <div class="requirements">
-                <div><strong>Переход с Мидзуното на Мидзуноэ</strong> <span class="badge">⏳ 1 день КД</span></div>
-                <div>Необходимо баллов: 8 баллов</div>
-                <div>Получение личной катаны и проявление ее цвета [5 рп действий] <span class="badge">Обязательно</span></div>
-                <div style="margin-top:0.5rem; font-size:0.85rem;">💡 Для зачета баллов необходимо отправить подробный отчет в канал #Отчеты в Discord с описанием выполненного действия</div>
+                <div class="requirement-box">
+                    <strong>Переход с Мидзуното на Мидзуноэ</strong> <span class="badge">⏳ 1 день КД</span><br>
+                    Необходимо баллов: 8<br>
+                    Получение личной катаны и проявление цвета <span class="badge">Обязательно</span><br>
+                    <span style="font-size:0.85rem;">💡 Отправьте отчет в канал #Отчеты в Discord</span>
+                </div>
             </div>
         </div>
 
         <!-- Вкладка 3: Кодекс воды -->
         <div id="codex" class="tab-content">
-            <h2>КОДЕКС ВОДЫ</h2>
-            <p>Путь истребителя демонов</p>
-            <div class="codex-grid">
-                <div class="codex-item"><div class="codex-number">1</div><strong>Уважай других!</strong><br>Это основа каждого бойца.</div>
-                <div class="codex-item"><div class="codex-number">2</div><strong>Решение проблем</strong><br>Для решения проблем делай то что нужно, всегда можно пойти на жертвы ради большего.</div>
-                <div class="codex-item"><div class="codex-number">3</div><strong>Контроль эмоций</strong><br>Не подавай виду эмоциям во время боя. Неважно что у тебя на душе, страх, злость, горе, боль или тому подобное. Когда эмоции берут верх - мышление притупляется.</div>
-                <div class="codex-item"><div class="codex-number">4</div><strong>Поиск решений</strong><br>Оказавшись в трудной ситуации, всегда ищи способ выбраться из неё. Также, как вода ищет куда просочиться.</div>
-                <div class="codex-item"><div class="codex-number">5</div><strong>Дыхание</strong><br>Не подводи своё дыхание, иначе ты подведёшь всех своих товарищей.</div>
-                <div class="codex-item"><div class="codex-number">6</div><strong>Честность</strong><br>Никогда не говори гадости за спинами своих товарищей.</div>
-                <div class="codex-item"><div class="codex-number">7</div><strong>Целеустремленность</strong><br>Имей цель, без этого прогресса не будет.</div>
+            <div class="section-card">
+                <h2>Кодекс воды</h2>
+                <p>Путь истребителя демонов</p>
+                <div class="codex-grid">
+                    <div class="codex-card"><div class="codex-number">1</div><strong>Уважай других!</strong><br>Основа каждого бойца</div>
+                    <div class="codex-card"><div class="codex-number">2</div><strong>Решение проблем</strong><br>Иди на жертвы ради большего</div>
+                    <div class="codex-card"><div class="codex-number">3</div><strong>Контроль эмоций</strong><br>Эмоции притупляют мышление</div>
+                    <div class="codex-card"><div class="codex-number">4</div><strong>Поиск решений</strong><br>Как вода ищет куда просочиться</div>
+                    <div class="codex-card"><div class="codex-number">5</div><strong>Дыхание</strong><br>Не подведи товарищей</div>
+                    <div class="codex-card"><div class="codex-number">6</div><strong>Честность</strong><br>Не говори гадости за спиной</div>
+                    <div class="codex-card"><div class="codex-number">7</div><strong>Целеустремленность</strong><br>Без цели нет прогресса</div>
+                </div>
+                <div class="info-block" style="margin-top:1rem;">
+                    <strong>Три важных принципа:</strong> Боевой товарищ лучше лучшей катаны · Нарушение кодекса порицается · Кодекс нужен, чтобы помогать людям<br>
+                    Дресс-код: Отсутствует
+                </div>
             </div>
-            <p><em>Три важных принципа:</em> Боевой товарищ всегда лучше, чем самая лучшая катана. Нарушение кодекса порицается, но не ведёт к ограничениям. Кодекс нужен людям, чтобы помогать другим людям.<br>Дресс-код: Отсутствует</p>
         </div>
 
         <!-- Вкладка 4: Обучение учеников -->
         <div id="training" class="tab-content">
-            <h2>Обучение Учеников</h2>
-            <p>Пошаговый процесс обучения новых истребителей демонов</p>
-            <div class="stage"><div class="stage-title">Стадия 1: Начало</div>После того, как вы привели скитальца в штаб, вы отводите его в удобное вам место и начинаете обучение. Вы спрашиваете имя и фамилию скитальца, при этом отписывая в Local Out Of Character чат информацию: "Ваше имя должно соответствовать имени, что могли носить жители Японии во время эпохи Тайсё (1912-1926 год)". Если адекватность человека вас устраивает, переходите на следующий этап.</div>
-            <div class="stage"><div class="stage-title">Стадия 2: Агитация</div>Проводите краткий экскурс по всем дыханиям. ВАЖНО: Не стоит плохо отзываться о других дыханиях. Если человек выбрал дыхание воды, вызываете администратора для выдачи никнейма и профессии ученика.</div>
-            <div class="stage"><div class="stage-title">Стадия 3: Посвящение</div>Прочитайте человеку первые 3 раздела устава истребителей демонов, ранговую и должностную иерархию. Отправляйтесь в нижнее додзё, выдайте тренировочную катану и продемонстрируйте каты.</div>
-            <div class="stage"><div class="stage-title">Стадия 4: Осознание</div>Дайте ученику время привыкнуть к катам. Попросите повторить любую комбинацию на вас (трижды). Проведите тренировочный бой, объяснив правила дуэли.</div>
-            <div class="stage"><div class="stage-title">Стадия 5: Заключение</div>Проведите экскурс по штабу против часовой стрелки, начиная с додзё. Не забудьте отписать отчёт в Discord канал!</div>
+            <div class="section-card">
+                <h2>Обучение учеников</h2>
+                <p>Пошаговый процесс обучения новых истребителей</p>
+                <div class="info-block"><div class="info-title">1. Начало</div>Приведите скитальца в штаб, узнайте имя (японская эпоха Тайсё 1912-1926). Проверьте адекватность.</div>
+                <div class="info-block"><div class="info-title">2. Агитация</div>Проведите экскурс по дыханиям. При выборе воды — вызовите администратора.</div>
+                <div class="info-block"><div class="info-title">3. Посвящение</div>Прочитайте устав, ранговую иерархию. Выдайте тренировочную катану в додзё.</div>
+                <div class="info-block"><div class="info-title">4. Осознание</div>Попросите повторить комбинации (3 раза). Проведите тренировочный бой.</div>
+                <div class="info-block"><div class="info-title">5. Заключение</div>Экскурс по штабу (против часовой стрелки). Отчёт в Discord.</div>
+            </div>
         </div>
 
         <!-- Вкладка 5: Тренировки -->
         <div id="breathing" class="tab-content">
-            <h2>Тренировки</h2>
-            <p>Система тренировок для развития навыков и концентрации дыхания</p>
-            <div class="stage"><div class="stage-title">Тренировка концентрации дыхания №1</div>Этап 1: Выбрать удобную позу для тренировки (Поза Лотоса) · Этап 2: Закройте глаза и сконцентрируйтесь на ритме: 3 секунды вдох | 2 секунды выдох · Этап 3: Поддерживайте ритм 5 минут, каждые 5 минут /try на сбитие дыхания. Минимум 10 отыгровок</div>
-            <div class="stage"><div class="stage-title">Тренировка концентрации дыхания №2</div>Этап 1: Достаньте клинок, подойдите к манекенам · Этап 2: Поддерживайте ритм дыхания · Этап 3: Отрабатывайте удары по манекену (/try на попадание). После попадания по всем частям тела /try "Сбилось ли дыхание?" Минимум 15 отыгровок</div>
-            <div class="stage"><div class="stage-title">Тренировка концентрации дыхания №3</div>Этап 1: Идёте к горе Сагири (Гора Урокодаки) · Этап 2: Привязываете валун к телу верёвкой · Этап 3: Поднимаетесь 10 минут, каждые 2 минуты /try на сбитие дыхания. Минимум 15 отыгровок</div>
-            <div class="stage"><div class="stage-title">Тренировка полной концентрации дыхания</div>Этап 1: Физическая разминка: 15 раз 2 подхода поднятие камня верёвками, берпи 3 подхода по 10 раз · Этап 2: Концентрация на дыхании 4 сек вдох, 4 сек держать, 4 сек выдох · Этап 3: Выполнить все этапы Тренировок 1-3</div>
+            <div class="section-card">
+                <h2>Тренировки</h2>
+                <p>Система тренировок для развития навыков и концентрации дыхания</p>
+                <div class="info-block"><div class="info-title">№1 — Концентрация дыхания</div>Поза лотоса · Ритм 3с вдох/2с выдох · 5 минут · /try каждые 5 мин · минимум 10 отыгровок</div>
+                <div class="info-block"><div class="info-title">№2 — Удары по манекену</div>Достаньте клинок · Поддерживайте ритм · /try на попадание · минимум 15 отыгровок</div>
+                <div class="info-block"><div class="info-title">№3 — Гора Сагири</div>Привяжите валун · Подъём 10 минут · /try каждые 2 мин · минимум 15 отыгровок</div>
+                <div class="info-block"><div class="info-title">Полная концентрация дыхания</div>Разминка: поднятие камня, берпи 3×10 · Дыхание 4-4-4 · Все этапы №1-3</div>
+            </div>
         </div>
 
         <!-- Вкладка 6: Владение клинком -->
         <div id="sword" class="tab-content">
-            <h2>Владение Клинком</h2>
-            <p>Искусство владения катаной и уход за клинком</p>
-            <div class="stage"><div class="stage-title">Шаг 1: Извлечение меча</div>Научитесь вытаскивать меч из ножен. ((Через /me ; /do отыгрываете выхватывание клинка))</div>
-            <div class="stage"><div class="stage-title">Шаг 2: Расслабление</div>Оставайтесь спокойным, держите мышцы свободно, регулируйте дыхание. Напряжение замедляет.</div>
-            <div class="stage"><div class="stage-title">Шаг 3: Баланс и позиция</div>Держите тело сбалансированным, ноги на ширине плеч. Держите меч удобно, парируйте удар, держа меч близко к себе.</div>
-            <div class="stage"><div class="stage-title">Шаг 4: Оценка ситуации</div>Анализируйте местность (свет, позиция). Ищите слабости противника.</div>
+            <div class="section-card">
+                <h2>Владение клинком</h2>
+                <p>Искусство владения катаной и уход за клинком</p>
+                <div class="info-block"><div class="info-title">🗡️ Шаг 1: Извлечение меча</div>Основа быстрого выхватывания (/me, /do)</div>
+                <div class="info-block"><div class="info-title">🧘 Шаг 2: Расслабление</div>Спокойствие, свободные мышцы, контроль дыхания</div>
+                <div class="info-block"><div class="info-title">⚖️ Шаг 3: Баланс и позиция</div>Ноги на ширине плеч, меч близко к себе</div>
+                <div class="info-block"><div class="info-title">🎯 Шаг 4: Оценка ситуации</div>Анализ местности, поиск слабостей противника</div>
 
-            <h3>Уход за Клинком</h3>
-            <div class="stage"><div class="stage-title">Снятие рукояти</div>/me зафиксировал рукоять штифтами мекуги · /do Рукоять зафиксирована</div>
-            <div class="stage"><div class="stage-title">Чистка</div>/me начал очищать клинок бумагой · /try клинок очищен? (при неудаче повторить) · /do Клинок очищен и блестит</div>
-            <div class="stage"><div class="stage-title">Смазывание</div>/me взял новую бумагу и нанёс масло · /me начал смазывать клинок · /do Клинок смазан и готов к использованию</div>
+                <h3>Уход за клинком</h3>
+                <div class="info-block"><div class="info-title">🔧 Снятие рукояти</div>/me зафиксировал рукоять · /do Рукоять зафиксирована</div>
+                <div class="info-block"><div class="info-title">🧹 Чистка</div>/me очищает клинок бумагой · /try клинок очищен?</div>
+                <div class="info-block"><div class="info-title">✨ Смазывание</div>/me наносит масло · /do Клинок готов к бою</div>
+            </div>
         </div>
 
         <footer>
-            Дыхание Воды · 水の呼吸 · Путь истребителя демонов
+            水の呼吸 — Дыхание Воды · Путь истребителя демонов
         </footer>
     </div>
 
     <script>
-        // Функциональность вкладок
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
