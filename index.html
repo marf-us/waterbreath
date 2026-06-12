@@ -44,32 +44,51 @@
             z-index: 1;
         }
 
-        /* Шапка с аниме-стилем и картинкой */
+        /* Шапка с фоновой картинкой */
         .hero {
+            position: relative;
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem;
             margin-bottom: 2rem;
-            background: rgba(10, 17, 40, 0.6);
-            backdrop-filter: blur(10px);
             border-radius: 2rem;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
-        .hero-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
+        /* Фоновое изображение */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border: 3px solid #3b82f6;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 0;
+            filter: brightness(0.4) blur(2px);
+            transition: filter 0.3s ease;
         }
 
-        .hero-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+        .hero:hover .hero-bg {
+            filter: brightness(0.5) blur(1px);
+        }
+
+        /* Затемнение поверх фона */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 17, 40, 0.7), rgba(26, 58, 92, 0.6));
+            z-index: 1;
+            border-radius: 2rem;
+        }
+
+        /* Контент поверх фона */
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -91,7 +110,7 @@
         }
 
         .subtitle {
-            color: #94a3b8;
+            color: #cbd5e1;
             margin-top: 1rem;
             font-size: 1rem;
         }
@@ -366,11 +385,7 @@
         /* Адаптивность */
         @media (max-width: 768px) {
             .hero {
-                padding: 1.5rem;
-            }
-            .hero-image {
-                width: 120px;
-                height: 120px;
+                padding: 2rem 1rem;
             }
             h1 {
                 font-size: 2rem;
@@ -395,22 +410,18 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Анимация появления */
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.2); }
-            100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Герой-секция с заголовком и картинкой -->
+        <!-- Герой-секция с фоновой картинкой -->
         <div class="hero">
-            <img src="https://i.ibb.co/kgPqXhJ3/29ad7a5af5002f9a6ffbe7a91046f446.jpg" alt="Гию Томиока" class="hero-image">
-            <h1>ДЫХАНИЕ ВОДЫ</h1>
-            <div class="japanese">水の呼吸 — Mizu no kokyū</div>
-            <div class="subtitle">Одно из пяти базовых дыханий, имитирующее текучесть и адаптивность воды</div>
+            <img src="https://i.ibb.co/kgPqXhJ3/29ad7a5af5002f9a6ffbe7a91046f446.jpg" alt="Гию Томиока фон" class="hero-bg">
+            <div class="hero-content">
+                <h1>ДЫХАНИЕ ВОДЫ</h1>
+                <div class="japanese">水の呼吸 — Mizu no kokyū</div>
+                <div class="subtitle">Одно из пяти базовых дыханий, имитирующее текучесть и адаптивность воды</div>
+            </div>
         </div>
 
         <!-- Вкладки навигации -->
